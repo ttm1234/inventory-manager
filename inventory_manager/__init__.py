@@ -30,7 +30,7 @@ db_prefix = 'prefix1'
 # 这个 get_db_arg 是获取 sqlalchemy 的 db_session, Base，给 InventoryManager 参数用
 def get_db_arg():
     # 需要提前确认 database 已存在
-    db_config = 'mysql+pymysql://****:******@127.0.0.1:13306/demo1?charset=utf8mb4'
+    db_config = 'mysql+pymysql://***:****@127.0.0.1:3306/demo1?charset=utf8mb4'
 
     echo = False
     # echo = True
@@ -54,7 +54,7 @@ def get_db_arg():
 
 
 redis_host = '127.0.0.1'
-redis_port = 16379
+redis_port = 6379
 redis_db = 1
 redis_password = ''
 

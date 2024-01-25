@@ -3,9 +3,9 @@ from setuptools import setup
 
 setup(
     name='inventory-manager',
-    version='0.0.3.dev1',
-    description='inventory_manager, for flash sale inventory. by sqlalchemy and redis.',
-    url='https://github.com/ttm1234/inventory_manager',
+    version='0.0.4.dev',
+    description='inventory manager, for flash sale inventory. by sqlalchemy and redis.',
+    url='https://github.com/ttm1234/inventory-manager',
     author='ttm1234',
     author_email='',
     # license='Anti 996',
