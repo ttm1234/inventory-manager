@@ -52,3 +52,11 @@ class InventoryModificationRecordABC(object):
         result = int(result) if result is not None else 0
 
         return result
+
+    @classmethod
+    def get_all_item_id(cls):
+        li = cls.query.with_entities(cls.item_id).distinct(cls.item_id).all()
+        r = [i[0] for i in li]
+
+        return r
+

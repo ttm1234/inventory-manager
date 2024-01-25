@@ -143,7 +143,7 @@ class InventoryManager(object):
         if self.cls_modification.exists_by_item_id(item_id):
             raise InventoryManagerExistsError()
 
-        if self._inventory_redis.get(item_id, null_to_zero=False) is not None:
+        if self._inventory_redis.exists(item_id):
             raise InventoryManagerConsistencyError()
 
         # -------------------------------
@@ -226,10 +226,11 @@ class InventoryManager(object):
         return True
 
     def refresh(self, item_id):
-        warnings.warn("Not Safe for Concurrency, 并发不安全", UserWarning)
+        warnings.warn(".refresh() -- Not Safe for Concurrency, 并发不安全", UserWarning)
         return self._refresh(item_id)
 
     def _refresh(self, item_id):
+        assert isinstance(item_id, str)
         self.cls_usage: InventoryUsageRecordABC
         self.cls_modification: InventoryModificationRecordABC
 
@@ -243,3 +244,21 @@ class InventoryManager(object):
 
         self._inventory_redis.set(item_id, num)
         return num
+    
+    def refresh_all(self):
+        """
+        该操作耗时可能较长
+        """
+        warnings.warn(".refresh_all() -- Not Safe for Concurrency, 并发不安全", UserWarning)
+
+        item_ids = self.cls_modification.get_all_item_id()
+
+        for i in item_ids:
+            self._refresh(i)
+
+        return len(item_ids)
+
+
+
+        
+
