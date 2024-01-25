@@ -213,16 +213,17 @@ class InventoryManager(object):
         # ------------------------------------------------------
         m_usage = self.cls_usage.create(item_id, delta)
 
-        success = self._inventory_redis.incr(item_id, num)
-        if success:
-            try:
-                self._db_save(m_usage)
-            except Exception as e:
-                a = self._inventory_redis.decr(item_id, num)
-                # todo assert a ????
-                raise e
+        db_success = False
+        try:
+            self._db_save(m_usage)
+            db_success = True
+        except Exception as e:
+            raise e
 
-        return success
+        if db_success:
+            self._inventory_redis.incr(item_id, num)
+
+        return True
 
     def refresh(self, item_id):
         warnings.warn("Not Safe for Concurrency, 并发不安全", UserWarning)

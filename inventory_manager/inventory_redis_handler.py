@@ -17,6 +17,8 @@ class InventoryRedisHandler(object):
         self.prefix = db_prefix
         self.red: redis.StrictRedis = redis_client
 
+        self.redis_func_lua_script = ...
+
         self._init()
 
     def _init(self):
