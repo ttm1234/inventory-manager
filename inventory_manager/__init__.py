@@ -8,8 +8,8 @@ from .exceptions import *
 # 使用消费库存的时候，会在 redis 中执行 incr 或者 decr 操作，同时在数据库的另一个表中记录流水日志。
 # 在 InventoryManager 中，会使用 python 动态创建 class 来实现 sqlalchemy 的 model class 定义和使用。
 # 所以 InventoryManager 实例化的参数需要 sqlalchemy 的 db_session, Base，还需要 redis client。
-# 考虑到实际使用场景，如果有多个 InventoryManager(), 那么他们的数据库表名字，redis的key，都需要用不同前缀隔开。
-# 所以实例化的参数需要提供一个 prefix（要求prefix在业务中务必是unique）
+# 考虑到实际使用场景，如果有多个 InventoryManager(), 那么他们的数据库表名字，redis 的 key，都需要用不同前缀隔开。
+# 所以实例化的参数需要提供一个 prefix（要求 prefix 在业务中务必是 unique）
 
 
 # demo 如下
@@ -24,13 +24,13 @@ from inventory_manager import InventoryManager
 
 # 创建必要的参数
 # --------------------------------------------------
-db_prefix = 'prefix1'
+db_prefix = 'prefix'
 
 
 # 这个 get_db_arg 是获取 sqlalchemy 的 db_session, Base，给 InventoryManager 参数用
 def get_db_arg():
     # 需要提前确认 database 已存在
-    db_config = 'mysql+pymysql://***:****@127.0.0.1:3306/demo1?charset=utf8mb4'
+    db_config = 'mysql+pymysql://***:*****@127.0.0.1:3306/demo1?charset=utf8mb4'
 
     echo = False
     # echo = True
@@ -135,11 +135,13 @@ print('''mgr.usage_incr(item_id='1', num=1000)''', r)
 r = mgr.refresh(item_id='1')
 print('''r = mgr.refresh(item_id='1')''', r)
 
+r = mgr.refresh_all()
+
 '''
 # todo 
     1. 幂等，幂等id
     2. refresh() 没有加锁
-    3. def refresh_all()
+    done!!!! 3. def refresh_all()
     4. 没测 flask_sqlalchemy 环境
     5. 没测 sqlalchemy 2.x.x 兼容
     6. table add column create_time

@@ -1,10 +1,18 @@
 #!/usr/bin/env python3
 from setuptools import setup
 
+import pypandoc
+
+
+long_description = pypandoc.convert_file('README.md', 'rst')
+print('pypandoc -- long_description', type(long_description), long_description)
+
+
 setup(
     name='inventory-manager',
-    version='0.0.6.dev',
+    version='0.0.9.dev0',
     description='inventory manager, for flash sale inventory. by sqlalchemy and redis.',
+    long_description=long_description,
     url='https://github.com/ttm1234/inventory-manager',
     author='ttm1234',
     author_email='',
@@ -20,13 +28,12 @@ setup(
         'Programming Language :: Python :: 3 :: Only',
     ],
     keywords='inventory inventory_manager inventory-manager',
+    include_package_data=True,
     packages=[
         'inventory_manager', 'inventory_manager.models',
     ],
     install_requires=["SQLAlchemy", "redis", ],
-    include_package_data=True,
 )
-
 
 '''
 python3 setup.py bdist_wheel

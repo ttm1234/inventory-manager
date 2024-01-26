@@ -5,7 +5,7 @@ for flash sale inventory.
 by sqlalchemy and redis.
 
 
-0.0.1dev is ok
+0.0.9.dev0 is ok
 
 pip3 install inventory_manager
 
