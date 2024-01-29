@@ -54,38 +54,6 @@ class InventoryManager(object):
         self.cls_usage = self._gen_db_model_cls(self.prefix, self.db_Base, InventoryUsageRecordABC)
         self.cls_modification = self._gen_db_model_cls(self.prefix, self.db_Base, InventoryModificationRecordABC)
 
-        # _tmp_cls_usage = type('_tmp_cls_usage' + self.prefix, (self.db_Base, InventoryUsageRecordABC,), {
-        #     '__abstract__': True,
-        #     '__table_args__': InventoryUsageRecordABC.__table_args__,
-        # })
-        # cls_usage_name = self.prefix + InventoryUsageRecordABC.classname_suffix_
-        # cls_usage_tablename = self.prefix + InventoryUsageRecordABC.tablename_suffix_
-        # self.cls_usage = type(
-        #     cls_usage_name,
-        #     (_tmp_cls_usage,),
-        #     {
-        #         '__tablename__': cls_usage_tablename,
-        #     }
-        # )
-        # # log('self.cls_usage', self.cls_usage)
-        # # log('self.db_Base.metadata.tables', self.db_Base.metadata.tables)
-        #
-        # # -----------------------
-        # _tmp_cls_modification = type('_tmp_cls_modification' + self.prefix, (self.db_Base, InventoryModificationRecordABC,), {
-        #     '__abstract__': True,
-        #     '__table_args__': InventoryModificationRecordABC.__table_args__,
-        # })
-        # cls_modification_name = self.prefix + InventoryModificationRecordABC.classname_suffix_
-        # cls_modification_tablename = self.prefix + InventoryModificationRecordABC.tablename_suffix_
-        # self.cls_modification = type(
-        #     cls_modification_name,
-        #     (_tmp_cls_modification,),
-        #     {
-        #         '__tablename__': cls_modification_tablename,
-        #     }
-        # )
-        # # log('self.cls_modification', self.cls_modification)
-
     # ------------------------------------------------------
     def _db_save(self, *args):
         if len(args) == 0:
