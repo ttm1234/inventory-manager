@@ -1,6 +1,8 @@
 from sqlalchemy import Column, func
 import sqlalchemy as db
 
+from .. import utils
+
 
 class InventoryUsageRecordABC(object):
     classname_suffix_ = 'InventoryUsageRecord'
@@ -9,6 +11,7 @@ class InventoryUsageRecordABC(object):
     id = Column(db.Integer, autoincrement=True, primary_key=True)
     item_id = Column(db.String(length=64), comment='item_id')
     delta = Column(db.Integer, comment='num for use，such as -1 for purchasing an item and +1 for canceling an order.')
+    create_time = Column(db.BigInteger, comment='create_time')
 
     __table_args__ = (
         {
@@ -23,6 +26,7 @@ class InventoryUsageRecordABC(object):
         m = cls()
         m.item_id = item_id
         m.delta = delta
+        m.create_time = utils.unix_timestamp()
 
         return m
 

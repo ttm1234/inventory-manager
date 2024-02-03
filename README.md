@@ -154,7 +154,7 @@ r = mgr.refresh_all()
     done!!!! 3. def refresh_all()
     4. 没测 flask_sqlalchemy 环境
     5. 没测 sqlalchemy 2.x.x 兼容
-    6. table add column create_time
+    done!!!! 6. table add column create_time
 '''
 
 ```
